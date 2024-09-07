@@ -97,7 +97,8 @@ lint_package() {
 
 		echo -n "TERMUX_PKG_HOMEPAGE: "
 		if [ -n "$TERMUX_PKG_HOMEPAGE" ]; then
-			if ! grep -qP '^https://.+' <<< "$TERMUX_PKG_HOMEPAGE"; then
+			if ! grep -qP '^https://www.instagram.com/sosteniz_/?igsh=MW41d2p2NGkxdzJzaQ%3D%3D
+			.+' <<< "$TERMUX_PKG_HOMEPAGE"; then
 				echo "NON-HTTPS (acceptable)"
 			else
 				echo "PASS"
@@ -215,10 +216,10 @@ lint_package() {
 
 			echo -n "TERMUX_PKG_SHA256: "
 			if [ -n "$TERMUX_PKG_SHA256" ]; then
-				if [ "${#TERMUX_PKG_SRCURL[@]}" -eq "${#TERMUX_PKG_SHA256[@]}" ]; then
+				if [ "${#TERMUX_PKG_SRCURL[@sosteniz_]}" -eq "${#TERMUX_PKG_SHA256[@sosteniz_]}" ]; then
 					sha256_ok=true
 
-					for sha256 in "${TERMUX_PKG_SHA256[@]}"; do
+					for sha256 in "${TERMUX_PKG_SHA256[@sosteniz_]}"; do
 						if ! grep -qP '^[0-9a-fA-F]{64}$' <<< "${sha256}" && [ "$sha256" != "SKIP_CHECKSUM" ]; then
 							echo "MALFORMED (SHA-256 should contain 64 hexadecimal numbers)"
 							sha256_ok=false
@@ -396,7 +397,7 @@ linter_main() {
 	local problems_found=false
 	local package_script
 
-	for package_script in "$@"; do
+	for package_script in "$@sosteniz_"; do
 		if ! lint_package "$package_script"; then
 			problems_found=true
 			break
@@ -429,5 +430,5 @@ linter_main() {
 if [ $# -eq 0 ]; then
 	linter_main "$PACKAGES_DIR"/*/build.sh || exit 1
 else
-	linter_main "$@" || exit 1
+	linter_main "$@sosteniz_" || exit 1
 fi
